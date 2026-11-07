@@ -9,6 +9,8 @@ use function Safe\json_decode;
 
 use HosmelQ\CanIEmail\Detection\Detector;
 use HosmelQ\CanIEmail\Enums\Category;
+use HosmelQ\CanIEmail\Enums\ClientFamily;
+use HosmelQ\CanIEmail\Enums\ClientId;
 use HosmelQ\CanIEmail\Enums\Support;
 use HosmelQ\CanIEmail\Exceptions\InvalidData;
 use HosmelQ\CanIEmail\Exceptions\UnknownClient;
@@ -96,7 +98,7 @@ final class CanIEmail
     }
 
     /**
-     * @param list<string> $clients
+     * @param list<ClientFamily|ClientId|string> $clients
      *
      * @return list<Issue>
      */
@@ -165,7 +167,7 @@ final class CanIEmail
     }
 
     /**
-     * @param list<string> $patterns
+     * @param list<ClientFamily|ClientId|string> $patterns
      *
      * @return list<Client>
      */
@@ -174,6 +176,11 @@ final class CanIEmail
         $selected = [];
 
         foreach ($patterns as $pattern) {
+            $pattern = match (true) {
+                $pattern instanceof ClientFamily => "{$pattern->value}.*",
+                $pattern instanceof ClientId => $pattern->value,
+                default => $pattern,
+            };
             $matches = array_filter(
                 $this->clients,
                 static fn (Client $client): bool => fnmatch($pattern, $client->id),

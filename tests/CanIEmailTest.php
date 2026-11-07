@@ -5,6 +5,8 @@ declare(strict_types=1);
 use HosmelQ\CanIEmail\CanIEmail;
 use HosmelQ\CanIEmail\Client;
 use HosmelQ\CanIEmail\Enums\Category;
+use HosmelQ\CanIEmail\Enums\ClientFamily;
+use HosmelQ\CanIEmail\Enums\ClientId;
 use HosmelQ\CanIEmail\Enums\Support;
 use HosmelQ\CanIEmail\Exceptions\InvalidData;
 use HosmelQ\CanIEmail\Exceptions\UnknownClient;
@@ -16,9 +18,17 @@ beforeEach(function (): void {
     $this->canIEmail = CanIEmail::fromJson(file_get_contents(__DIR__.'/Fixtures/caniemail.json'));
 });
 
-it('rejects client patterns that match no client', function (): void {
-    $this->canIEmail->check('<div></div>', ['gmail.*', 'yahoo.*']);
-})->throws(UnknownClient::class, 'No email client matches "yahoo.*".');
+it('rejects clients and patterns that match no client', function (
+    ClientFamily|ClientId|string $client,
+    string $pattern,
+): void {
+    expect(fn (): array => $this->canIEmail->check('<div></div>', ['gmail.*', $client]))
+        ->toThrow(UnknownClient::class, "No email client matches \"{$pattern}\".");
+})->with([
+    'a client case' => [ClientId::YahooIos, 'yahoo.ios'],
+    'a family case' => [ClientFamily::Yahoo, 'yahoo.*'],
+    'a pattern' => ['yahoo.*', 'yahoo.*'],
+]);
 
 it('rejects data that does not match the caniemail format', function (mixed $data): void {
     CanIEmail::fromJson(json_encode($data, JSON_THROW_ON_ERROR));
@@ -173,6 +183,15 @@ it('checks every client by default', function (): void {
         ->toBe(['gmail.android', 'gmail.ios', 'outlook.windows']);
 });
 
+it('checks the clients given as enum cases', function (array $clients, array $ids): void {
+    $issues = $this->canIEmail->check('<p style="display: flex"></p>', $clients);
+
+    expect(array_map(fn (Issue $issue): string => $issue->client->id, $issues))->toBe($ids);
+})->with([
+    'a client' => [[ClientId::OutlookWindows], ['outlook.windows']],
+    'a family' => [[ClientFamily::Gmail], ['gmail.android', 'gmail.ios']],
+]);
+
 it('checks the matching clients once, in the order of the data', function (): void {
     $issues = $this->canIEmail->check('<p style="display: flex"></p>', [
         'outlook.*',
@@ -182,6 +201,25 @@ it('checks the matching clients once, in the order of the data', function (): vo
 
     expect(array_map(fn (Issue $issue): string => $issue->client->id, $issues))
         ->toBe(['gmail.ios', 'outlook.windows']);
+});
+
+it('has an enum case named after each bundled client and family', function (): void {
+    $cases = [...ClientFamily::cases(), ...ClientId::cases()];
+    $clients = CanIEmail::create()->clients();
+
+    expect(array_column(ClientId::cases(), 'value'))
+        ->toEqualCanonicalizing(array_map(fn (Client $client): string => $client->id, $clients))
+        ->and(array_column(ClientFamily::cases(), 'value'))
+        ->toEqualCanonicalizing(array_values(array_unique(array_map(
+            fn (Client $client): string => $client->family,
+            $clients,
+        ))))
+        ->and(array_column($cases, 'name'))
+        ->toBe(array_map(
+            fn (ClientFamily|ClientId $case): string
+                => str_replace(['.', '-'], '', ucwords($case->value, '.-')),
+            $cases,
+        ));
 });
 
 it('lists the tested clients in the order of the data', function (): void {

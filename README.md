@@ -48,6 +48,22 @@ patterns use `*`:
 $issues = CanIEmail::create()->check($html, ['gmail.*', '*.ios', 'outlook.windows']);
 ```
 
+`HosmelQ\CanIEmail\Enums\ClientFamily` has a case for each family in the bundled data and
+`HosmelQ\CanIEmail\Enums\ClientId` one for each client, named after their IDs. A family case
+such as `ClientFamily::Gmail` checks every Gmail platform, like `gmail.*`, and a client case such
+as `ClientId::AppleMailIos` checks `apple-mail.ios`. Cases and patterns can share a list:
+
+```php
+use HosmelQ\CanIEmail\Enums\ClientFamily;
+use HosmelQ\CanIEmail\Enums\ClientId;
+
+$issues = CanIEmail::create()->check($html, [
+    ClientFamily::Gmail,
+    ClientId::OutlookWindows,
+    '*.ios',
+]);
+```
+
 If you leave out the clients, `check()` checks all of them, and an empty list checks none. List
 the clients with `clients()`:
 
@@ -57,7 +73,7 @@ foreach (CanIEmail::create()->clients() as $client) {
 }
 ```
 
-A pattern that matches no client throws `HosmelQ\CanIEmail\Exceptions\UnknownClient`.
+A case or pattern that matches no client throws `HosmelQ\CanIEmail\Exceptions\UnknownClient`.
 
 ## Use newer data
 
@@ -68,9 +84,10 @@ caniemail's JSON to `fromJson()`:
 $canIEmail = CanIEmail::fromJson(file_get_contents('https://www.caniemail.com/api/data.json'));
 ```
 
-Features that caniemail adds after a release are detected once a release maps them. Data that does
-not match caniemail's format throws `HosmelQ\CanIEmail\Exceptions\InvalidData`, and invalid JSON
-throws `Safe\Exceptions\JsonException`.
+Features that caniemail adds after a release are detected once a release maps them. Clients it
+adds work as IDs and patterns right away, and get enum cases in a later release. Data that
+does not match caniemail's format throws `HosmelQ\CanIEmail\Exceptions\InvalidData`, and invalid
+JSON throws `Safe\Exceptions\JsonException`.
 
 ## What it detects
 
