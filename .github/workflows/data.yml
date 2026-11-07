@@ -1,0 +1,40 @@
+name: caniemail data
+
+on:
+  schedule:
+    - cron: '0 12 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    name: Check caniemail data
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+
+      - name: Set up PHP
+        uses: hosmelq/.github/.github/actions/php-setup@32f4a95b53649f1634b195193a61bb56a6b26d50 # main
+        with:
+          php-version: '8.4'
+        env:
+          fail-fast: true
+
+      - name: Install composer dependencies
+        run: composer install --no-interaction --no-progress --prefer-dist
+
+      - name: Download the latest data
+        run: composer update-data
+
+      - name: Run tests against the latest data
+        run: composer test
+
+      - name: Check the bundled data is current
+        run: git diff --exit-code --stat -- data/caniemail.json

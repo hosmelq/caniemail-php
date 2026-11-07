@@ -1,0 +1,503 @@
+<?php
+
+declare(strict_types=1);
+
+namespace HosmelQ\CanIEmail\Detection;
+
+final class Catalog
+{
+    public const string ADJACENT_SIBLING_COMBINATOR = 'css-selector-adjacent-sibling';
+
+    public const string AMP = 'amp';
+
+    public const string ANCHOR_LINKS = 'html-anchor-links';
+
+    public const array AT_RULES = [
+        'font-face' => ['css-at-font-face'],
+        'import' => ['css-at-import'],
+        'keyframes' => ['css-at-keyframes'],
+        'media' => ['css-at-media'],
+        'supports' => ['css-at-supports'],
+    ];
+
+    public const string ATTRIBUTE_SELECTOR = 'css-selector-attribute';
+
+    public const array ATTRIBUTES = [
+        'align' => ['html-align'],
+        'aria-describedby' => ['html-aria-describedby'],
+        'aria-hidden' => ['html-aria-hidden'],
+        'aria-label' => ['html-aria-label'],
+        'aria-labelledby' => ['html-aria-labelledby'],
+        'aria-live' => ['html-aria-live'],
+        'background' => ['html-background'],
+        'cellpadding' => ['html-cellpadding'],
+        'cellspacing' => ['html-cellspacing'],
+        'command' => ['html-command-attribute'],
+        'commandfor' => ['html-command-attribute'],
+        'dir' => ['html-dir'],
+        'height' => ['html-height'],
+        'hidden' => ['html-hidden'],
+        'inert' => ['css-inert-attribute'],
+        'lang' => ['html-lang'],
+        'loading' => ['html-loading-attribute'],
+        'popover' => ['html-popover'],
+        'required' => ['html-required'],
+        'role' => ['html-role'],
+        'sizes' => ['html-srcset'],
+        'srcset' => ['html-srcset'],
+        'target' => ['html-target'],
+        'valign' => ['html-valign'],
+        'width' => ['html-width'],
+    ];
+
+    public const string BASE64_IMAGE = 'image-base64';
+
+    public const string CHAINING_SELECTORS = 'css-selector-chaining';
+
+    public const string CHILD_COMBINATOR = 'css-selector-child';
+
+    public const string CLASS_SELECTOR = 'css-selector-class';
+
+    public const string COLOR_SCHEME_META = 'html-meta-color-scheme';
+
+    public const string CSS_COMMENTS = 'css-comments';
+
+    public const string CSS_NESTING = 'css-nesting';
+
+    public const string CSS_VARIABLES = 'css-variables';
+
+    public const string DESCENDANT_COMBINATOR = 'css-selector-descendant';
+
+    public const string DOCTYPE = 'html-doctype';
+
+    public const array ELEMENTS = [
+        'abbr' => ['html-abbr'],
+        'acronym' => ['html-acronym'],
+        'address' => ['html-address'],
+        'article' => ['html-semantics'],
+        'aside' => ['html-semantics'],
+        'audio' => ['html-audio'],
+        'base' => ['html-base'],
+        'bdi' => ['html-bdi'],
+        'blockquote' => ['html-blockquote'],
+        'body' => ['html-body'],
+        'code' => ['html-code'],
+        'del' => ['html-del'],
+        'details' => ['html-semantics'],
+        'dfn' => ['html-dfn'],
+        'dialog' => ['html-dialog'],
+        'div' => ['html-div'],
+        'dl' => ['html-lists'],
+        'figcaption' => ['html-semantics'],
+        'figure' => ['html-semantics'],
+        'footer' => ['html-semantics'],
+        'form' => ['html-form'],
+        'h1' => ['html-h1-h6'],
+        'h2' => ['html-h1-h6'],
+        'h3' => ['html-h1-h6'],
+        'h4' => ['html-h1-h6'],
+        'h5' => ['html-h1-h6'],
+        'h6' => ['html-h1-h6'],
+        'header' => ['html-semantics'],
+        'hr' => ['html-hr'],
+        'img' => ['html-img'],
+        'link' => ['html-link'],
+        'main' => ['html-semantics'],
+        'map' => ['html-image-maps'],
+        'mark' => ['html-semantics'],
+        'marquee' => ['html-marquee'],
+        'meter' => ['html-meter'],
+        'nav' => ['html-semantics'],
+        'object' => ['html-object'],
+        'ol' => ['html-lists'],
+        'p' => ['html-p'],
+        'picture' => ['html-picture'],
+        'pre' => ['html-pre'],
+        'progress' => ['html-progress'],
+        'rp' => ['html-rp'],
+        'rt' => ['html-rt'],
+        'ruby' => ['html-ruby'],
+        'section' => ['html-semantics'],
+        'select' => ['html-select'],
+        'small' => ['html-small'],
+        'span' => ['html-span'],
+        'strike' => ['html-strike'],
+        'strong' => ['html-strong'],
+        'style' => ['html-style'],
+        'summary' => ['html-semantics'],
+        'svg' => ['html-svg'],
+        'table' => ['html-table'],
+        'textarea' => ['html-textarea'],
+        'time' => ['html-semantics'],
+        'ul' => ['html-lists'],
+        'video' => ['html-video'],
+        'wbr' => ['html-wbr'],
+    ];
+
+    public const array FUNCTIONS = [
+        'calc' => ['css-unit-calc'],
+        'clamp' => ['css-function-clamp'],
+        'conic-gradient' => ['css-conic-gradient'],
+        'lab' => ['css-modern-color'],
+        'lch' => ['css-modern-color'],
+        'light-dark' => ['css-function-light-dark'],
+        'linear-gradient' => ['css-linear-gradient'],
+        'max' => ['css-function-max'],
+        'min' => ['css-function-min'],
+        'oklab' => ['css-modern-color'],
+        'oklch' => ['css-modern-color'],
+        'radial-gradient' => ['css-radial-gradient'],
+        'rgb' => ['css-rgb'],
+        'rgba' => ['css-rgba'],
+        'var' => ['css-variables'],
+    ];
+
+    public const string GENERAL_SIBLING_COMBINATOR = 'css-selector-general-sibling';
+
+    public const string GROUPING_SELECTORS = 'css-selector-grouping';
+
+    public const string HTML_COMMENTS = 'html-comments';
+
+    public const string ID_SELECTOR = 'css-selector-id';
+
+    public const array IMAGE_EXTENSIONS = [
+        'apng' => ['image-apng'],
+        'avif' => ['image-avif'],
+        'bmp' => ['image-bmp'],
+        'gif' => ['image-gif'],
+        'heic' => ['image-heif'],
+        'heif' => ['image-heif'],
+        'ico' => ['image-ico'],
+        'jpeg' => ['image-jpg'],
+        'jpg' => ['image-jpg'],
+        'mp4' => ['image-mp4'],
+        'png' => ['image-png'],
+        'svg' => ['image-svg'],
+        'tif' => ['image-tiff'],
+        'tiff' => ['image-tiff'],
+        'webp' => ['image-webp'],
+    ];
+
+    public const array IMAGE_TYPES = [
+        'image/apng' => ['image-apng'],
+        'image/avif' => ['image-avif'],
+        'image/bmp' => ['image-bmp'],
+        'image/gif' => ['image-gif'],
+        'image/heic' => ['image-heif'],
+        'image/heif' => ['image-heif'],
+        'image/jpeg' => ['image-jpg'],
+        'image/jpg' => ['image-jpg'],
+        'image/png' => ['image-png'],
+        'image/svg+xml' => ['image-svg'],
+        'image/tiff' => ['image-tiff'],
+        'image/vnd.microsoft.icon' => ['image-ico'],
+        'image/webp' => ['image-webp'],
+        'image/x-icon' => ['image-ico'],
+        'video/mp4' => ['image-mp4'],
+    ];
+
+    public const string IMPORTANT = 'css-important';
+
+    public const array KEYWORDS = [
+        'fit-content' => ['css-intrinsic-size'],
+        'initial' => ['css-unit-initial'],
+        'max-content' => ['css-intrinsic-size'],
+        'min-content' => ['css-intrinsic-size'],
+        'system-ui' => ['css-sytem-ui'],
+        'ui-monospace' => ['css-sytem-ui'],
+        'ui-rounded' => ['css-sytem-ui'],
+        'ui-sans-serif' => ['css-sytem-ui'],
+        'ui-serif' => ['css-sytem-ui'],
+    ];
+
+    public const string MAILTO_LINKS = 'html-mailto-links';
+
+    public const array MEDIA_FEATURES = [
+        '-webkit-device-pixel-ratio' => ['css-at-media-device-pixel-ratio'],
+        'any-hover' => ['css-at-media-hover'],
+        'hover' => ['css-at-media-hover'],
+        'orientation' => ['css-at-media-orientation'],
+        'prefers-color-scheme' => ['css-at-media-prefers-color-scheme'],
+        'prefers-reduced-motion' => ['css-at-media-prefers-reduced-motion'],
+    ];
+
+    public const array PROPERTIES = [
+        'accent-color' => ['css-accent-color'],
+        'align-items' => ['css-align-items'],
+        'animation' => ['css-animation'],
+        'aspect-ratio' => ['css-aspect-ratio'],
+        'backdrop-filter' => ['css-backdrop-filter'],
+        'background' => ['css-background'],
+        'background-blend-mode' => ['css-background-blend-mode'],
+        'background-clip' => ['css-background-clip'],
+        'background-color' => ['css-background-color'],
+        'background-image' => ['css-background-image'],
+        'background-origin' => ['css-background-origin'],
+        'background-position' => ['css-background-position'],
+        'background-repeat' => ['css-background-repeat'],
+        'background-size' => ['css-background-size'],
+        'block-size' => ['css-block-inline-size'],
+        'border' => ['css-border'],
+        'border-block' => ['css-border-inline-block'],
+        'border-block-color' => ['css-border-inline-block-individual'],
+        'border-block-end' => ['css-border-inline-block-individual'],
+        'border-block-end-color' => ['css-border-inline-block-longhand'],
+        'border-block-end-style' => ['css-border-inline-block-longhand'],
+        'border-block-end-width' => ['css-border-inline-block-longhand'],
+        'border-block-start' => ['css-border-inline-block-individual'],
+        'border-block-start-color' => ['css-border-inline-block-longhand'],
+        'border-block-start-style' => ['css-border-inline-block-longhand'],
+        'border-block-start-width' => ['css-border-inline-block-longhand'],
+        'border-block-style' => ['css-border-inline-block-individual'],
+        'border-block-width' => ['css-border-inline-block-individual'],
+        'border-bottom-left-radius' => ['css-border-radius'],
+        'border-bottom-right-radius' => ['css-border-radius'],
+        'border-collapse' => ['css-border-collapse'],
+        'border-end-end-radius' => ['css-border-radius-logical'],
+        'border-end-start-radius' => ['css-border-radius-logical'],
+        'border-image' => ['css-border-image'],
+        'border-inline' => ['css-border-inline-block'],
+        'border-inline-color' => ['css-border-inline-block-individual'],
+        'border-inline-end' => ['css-border-inline-block-individual'],
+        'border-inline-end-color' => ['css-border-inline-block-longhand'],
+        'border-inline-end-style' => ['css-border-inline-block-longhand'],
+        'border-inline-end-width' => ['css-border-inline-block-longhand'],
+        'border-inline-start' => ['css-border-inline-block-individual'],
+        'border-inline-start-color' => ['css-border-inline-block-longhand'],
+        'border-inline-start-style' => ['css-border-inline-block-longhand'],
+        'border-inline-start-width' => ['css-border-inline-block-longhand'],
+        'border-inline-style' => ['css-border-inline-block-individual'],
+        'border-inline-width' => ['css-border-inline-block-individual'],
+        'border-radius' => ['css-border-radius'],
+        'border-spacing' => ['css-border-spacing'],
+        'border-start-end-radius' => ['css-border-radius-logical'],
+        'border-start-start-radius' => ['css-border-radius-logical'],
+        'border-top-left-radius' => ['css-border-radius'],
+        'border-top-right-radius' => ['css-border-radius'],
+        'bottom' => ['css-left-right-top-bottom'],
+        'box-shadow' => ['css-box-shadow'],
+        'box-sizing' => ['css-box-sizing'],
+        'caption-side' => ['css-caption-side'],
+        'clear' => ['css-clear'],
+        'clip-path' => ['css-clip-path'],
+        'color-scheme' => ['css-color-scheme'],
+        'column-count' => ['css-column-count', 'css-column-layout-properties'],
+        'column-fill' => ['css-column-layout-properties'],
+        'column-gap' => ['css-column-layout-properties', 'css-gap'],
+        'column-rule' => ['css-column-layout-properties'],
+        'column-rule-color' => ['css-column-layout-properties'],
+        'column-rule-style' => ['css-column-layout-properties'],
+        'column-rule-width' => ['css-column-layout-properties'],
+        'column-span' => ['css-column-layout-properties'],
+        'column-width' => ['css-column-layout-properties'],
+        'columns' => ['css-column-layout-properties'],
+        'cursor' => ['css-cursor'],
+        'direction' => ['css-direction'],
+        'display' => ['css-display'],
+        'empty-cells' => ['css-empty-cells'],
+        'filter' => ['css-filter'],
+        'float' => ['css-float'],
+        'font' => ['css-font'],
+        'font-kerning' => ['css-font-kerning'],
+        'font-size' => ['css-font-size'],
+        'font-size-adjust' => ['css-font-size-adjust'],
+        'font-stretch' => ['css-font-stretch'],
+        'font-weight' => ['css-font-weight'],
+        'gap' => ['css-gap'],
+        'grid-template' => ['css-grid-template'],
+        'grid-template-areas' => ['css-grid-template'],
+        'grid-template-columns' => ['css-grid-template'],
+        'grid-template-rows' => ['css-grid-template'],
+        'height' => ['css-height'],
+        'hyphenate-character' => ['css-hyphenate-character'],
+        'hyphenate-limit-chars' => ['css-hyphenate-limit-chars'],
+        'hyphens' => ['css-hyphens'],
+        'inline-size' => ['css-block-inline-size', 'css-inline-size'],
+        'inset' => ['css-inset'],
+        'justify-content' => ['css-justify-content'],
+        'left' => ['css-left-right-top-bottom'],
+        'letter-spacing' => ['css-letter-spacing'],
+        'line-height' => ['css-line-height'],
+        'list-style' => ['css-list-style'],
+        'list-style-image' => ['css-list-style-image'],
+        'list-style-position' => ['css-list-style-position'],
+        'list-style-type' => ['css-list-style-type'],
+        'margin' => ['css-margin'],
+        'margin-block' => ['css-margin-inline-block'],
+        'margin-block-end' => ['css-margin-block-start-end'],
+        'margin-block-start' => ['css-margin-block-start-end'],
+        'margin-inline' => ['css-margin-inline-block'],
+        'margin-inline-end' => ['css-margin-inline-start-end'],
+        'margin-inline-start' => ['css-margin-inline-start-end'],
+        'mask-image' => ['css-mask-image'],
+        'max-block-size' => ['css-max-block-size'],
+        'max-height' => ['css-max-height'],
+        'max-inline-size' => ['css-max-inline-size'],
+        'max-width' => ['css-max-width'],
+        'min-block-size' => ['css-min-block-size'],
+        'min-height' => ['css-min-height'],
+        'min-inline-size' => ['css-min-inline-size'],
+        'min-width' => ['css-min-width'],
+        'mix-blend-mode' => ['css-mix-blend-mode'],
+        'object-fit' => ['css-object-fit'],
+        'object-position' => ['css-object-position'],
+        'opacity' => ['css-opacity'],
+        'orphans' => ['css-orphans'],
+        'outline' => ['css-outline'],
+        'outline-offset' => ['css-outline-offset'],
+        'overflow' => ['css-overflow'],
+        'overflow-wrap' => ['css-overflow-wrap'],
+        'padding' => ['css-padding'],
+        'padding-block' => ['css-padding-inline-block'],
+        'padding-block-end' => ['css-padding-block-start-end'],
+        'padding-block-start' => ['css-padding-block-start-end'],
+        'padding-inline' => ['css-padding-inline-block'],
+        'padding-inline-end' => ['css-padding-inline-start-end'],
+        'padding-inline-start' => ['css-padding-inline-start-end'],
+        'position' => ['css-position'],
+        'resize' => ['css-resize'],
+        'right' => ['css-left-right-top-bottom'],
+        'row-gap' => ['css-gap'],
+        'shape-margin' => ['css-shape-margin'],
+        'shape-outside' => ['css-shape-outside'],
+        'tab-size' => ['css-tab-size'],
+        'table-layout' => ['css-table-layout'],
+        'text-align' => ['css-text-align'],
+        'text-align-last' => ['css-text-align-last'],
+        'text-decoration' => ['css-text-decoration'],
+        'text-decoration-color' => ['css-text-decoration-color'],
+        'text-decoration-line' => ['css-text-decoration-line'],
+        'text-decoration-skip-ink' => ['css-text-decoration-skip-ink'],
+        'text-decoration-style' => ['css-text-decoration-style'],
+        'text-decoration-thickness' => ['css-text-decoration-thickness'],
+        'text-emphasis' => ['css-text-emphasis'],
+        'text-emphasis-position' => ['css-text-emphasis-position'],
+        'text-indent' => ['css-text-indent'],
+        'text-justify' => ['css-text-justify'],
+        'text-orientation' => ['css-text-orientation'],
+        'text-overflow' => ['css-text-overflow'],
+        'text-shadow' => ['css-text-shadow'],
+        'text-transform' => ['css-text-transform'],
+        'text-underline-offset' => ['css-text-underline-offset'],
+        'text-underline-position' => ['css-text-underline-position'],
+        'text-wrap' => ['css-text-wrap'],
+        'top' => ['css-left-right-top-bottom'],
+        'transform' => ['css-transform'],
+        'transition' => ['css-transition'],
+        'user-select' => ['css-user-select'],
+        'vertical-align' => ['css-vertical-align'],
+        'visibility' => ['css-visibility'],
+        'white-space' => ['css-white-space'],
+        'white-space-collapse' => ['css-white-space-collapse'],
+        'widows' => ['css-widows'],
+        'width' => ['css-width'],
+        'word-break' => ['css-word-break'],
+        'word-spacing' => ['css-word-spacing'],
+        'word-wrap' => ['css-word-wrap'],
+        'writing-mode' => ['css-writing-mode'],
+        'z-index' => ['css-z-index'],
+    ];
+
+    public const array PROPERTY_PREFIXES = [
+        'animation' => ['css-animation'],
+        'background' => ['css-background'],
+        'background-position' => ['css-background-position'],
+        'border' => ['css-border'],
+        'border-image' => ['css-border-image'],
+        'inset' => ['css-inset'],
+        'margin' => ['css-margin'],
+        'outline' => ['css-outline'],
+        'overflow' => ['css-overflow'],
+        'padding' => ['css-padding'],
+        'scroll-snap' => ['css-scroll-snap'],
+        'text-decoration' => ['css-text-decoration'],
+        'text-emphasis' => ['css-text-emphasis'],
+        'text-wrap' => ['css-text-wrap'],
+        'transform' => ['css-transform'],
+        'transition' => ['css-transition'],
+    ];
+
+    public const array PSEUDOS = [
+        'active' => ['css-pseudo-class-active'],
+        'after' => ['css-pseudo-element-after'],
+        'before' => ['css-pseudo-element-before'],
+        'checked' => ['css-pseudo-class-checked'],
+        'default' => ['css-pseudo-class-default'],
+        'first-child' => ['css-pseudo-class-first-child'],
+        'first-letter' => ['css-pseudo-element-first-letter'],
+        'first-line' => ['css-pseudo-element-first-line'],
+        'first-of-type' => ['css-pseudo-class-first-of-type'],
+        'focus' => ['css-pseudo-class-focus'],
+        'focus-visible' => ['css-pseudo-class-focus-visible'],
+        'focus-within' => ['css-pseudo-class-focus-within'],
+        'has' => ['css-pseudo-class-has'],
+        'hover' => ['css-pseudo-class-hover'],
+        'lang' => ['css-pseudo-class-lang'],
+        'last-child' => ['css-pseudo-class-last-child'],
+        'last-of-type' => ['css-pseudo-class-last-of-type'],
+        'link' => ['css-pseudo-class-link'],
+        'marker' => ['css-pseudo-element-marker'],
+        'not' => ['css-pseudo-class-not'],
+        'nth-child' => ['css-pseudo-class-nth-child'],
+        'nth-last-child' => ['css-pseudo-class-nth-last-child'],
+        'nth-last-of-type' => ['css-pseudo-class-nth-last-of-type'],
+        'nth-of-type' => ['css-pseudo-class-nth-of-type'],
+        'only-child' => ['css-pseudo-class-only-child'],
+        'only-of-type' => ['css-pseudo-class-only-of-type'],
+        'placeholder' => ['css-pseudo-element-placeholder'],
+        'target' => ['css-pseudo-class-target'],
+        'visited' => ['css-pseudo-class-visited'],
+    ];
+
+    public const string TYPE_SELECTOR = 'css-selector-type';
+
+    public const array TYPES = [
+        'button' => [
+            'reset' => ['html-button-reset'],
+            'submit' => ['html-button-submit'],
+        ],
+        'input' => [
+            'checkbox' => ['html-input-checkbox'],
+            'hidden' => ['html-input-hidden'],
+            'radio' => ['html-input-radio'],
+            'reset' => ['html-input-reset'],
+            'submit' => ['html-input-submit'],
+            'text' => ['html-input-text'],
+        ],
+    ];
+
+    public const array UNITS = [
+        '%' => ['css-unit-percent'],
+        'ch' => ['css-unit-ch'],
+        'cm' => ['css-unit-cm'],
+        'em' => ['css-unit-em'],
+        'ex' => ['css-unit-ex'],
+        'in' => ['css-unit-in'],
+        'mm' => ['css-unit-mm'],
+        'pc' => ['css-unit-pc'],
+        'pt' => ['css-unit-pt'],
+        'px' => ['css-unit-px'],
+        'rem' => ['css-unit-rem'],
+        'vh' => ['css-unit-vh'],
+        'vmax' => ['css-unit-vmax'],
+        'vmin' => ['css-unit-vmin'],
+        'vw' => ['css-unit-vw'],
+    ];
+
+    public const string UNIVERSAL_SELECTOR = 'css-selector-universal';
+
+    public const array VALUES = [
+        'display' => [
+            'flex' => ['css-display-flex'],
+            'grid' => ['css-display-grid'],
+            'inline-flex' => ['css-display-flex'],
+            'none' => ['css-display-none'],
+        ],
+        'flex-direction' => [
+            'column' => ['css-flex-direction'],
+        ],
+        'flex-wrap' => [
+            'wrap' => ['css-flex-wrap'],
+        ],
+    ];
+}

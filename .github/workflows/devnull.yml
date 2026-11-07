@@ -1,0 +1,29 @@
+name: /dev/null
+
+on:
+  release:
+    types: [published]
+
+permissions: {}
+
+jobs:
+  commit:
+    name: Commit release
+
+    environment: devnull
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Commit to /dev/null
+        uses: nunomaduro/dev-null.sh/.github/actions/commit@aa319e3e2bbea00faddc32e6f5835b5db2d997fc # production
+        with:
+          body: |
+            ${{ github.event.repository.name }} ${{ github.event.release.tag_name }} is out.
+
+            ${{ github.event.release.body }}
+
+            Check which email clients support the HTML and CSS in an email, with data from caniemail.com.
+
+            ${{ github.event.release.html_url }}
+          ssh-key: ${{ secrets.DEVNULL_SSH_KEY }}

@@ -1,0 +1,8 @@
+includes:
+  - vendor/hosmelq/php-coding-standard/config/phpstan-php.neon
+
+parameters:
+  parallel:
+    maximumNumberOfProcesses: 4
+  paths:
+    - src
