@@ -8,7 +8,6 @@ use Rector\Config\RectorConfig;
 
 return RectorConfig::configure()
     ->withCache('./.cache/rector', FileCacheStorage::class)
-    ->withParallel(maxNumberOfProcess: 4)
     ->withPaths([
         __DIR__.'/src',
         __DIR__.'/tests',
