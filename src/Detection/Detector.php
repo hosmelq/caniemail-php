@@ -162,7 +162,7 @@ final class Detector
 
     private function comments(string $css): void
     {
-        $code = preg_replace('/"(?:[^"\\\\]|\\\\.)*"|\'(?:[^\'\\\\]|\\\\.)*\'/s', '', $css);
+        $code = preg_replace('/"(?:[^"\\\\]++|\\\\.)*+"|\'(?:[^\'\\\\]++|\\\\.)*+\'/s', '', $css);
 
         if (str_contains($code, '/*')) {
             $this->add(Catalog::CSS_COMMENTS);

@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 
 - Require wikimedia/css-sanitizer 6.2.2 or newer.
+- Check CSS that contains long strings, such as data URIs, which used to throw a `Safe\Exceptions\PcreException`.
 
 ## v1.1.0 - 2026-11-07
 

@@ -46,6 +46,12 @@ it('detects CSS comments outside strings', function (string $html, array $slugs)
         '<p style="/* x */ color: red"></p>',
         ['html-p', 'css-comments'],
     ],
+    'a comment after a long string' => [
+        '<p style="background-image: url(\'data:image/png;base64,'
+            .str_repeat('A', 100_000)
+            .'\') /* x */"></p>',
+        ['html-p', 'css-comments', 'css-background-image', 'image-png', 'image-base64'],
+    ],
 ]);
 
 it('detects CSS functions, keywords and units', function (): void {
