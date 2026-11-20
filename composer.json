@@ -28,17 +28,16 @@
         "ext-dom": "*",
         "ext-libxml": "*",
         "ext-mbstring": "*",
-        "thecodingmachine/safe": "^3.4",
-        "wikimedia/css-sanitizer": "^6.2"
+        "thecodingmachine/safe": "^3.4.0",
+        "wikimedia/css-sanitizer": "^6.2.2"
     },
     "require-dev": {
-        "ergebnis/composer-normalize": "^2.56",
-        "hosmelq/php-coding-standard": "^1.4",
-        "laravel/pao": "^1.1",
-        "pestphp/pest": "^5.3",
-        "pestphp/pest-plugin-agent": "^5.0",
-        "pestphp/pest-plugin-rector": "^5.0",
-        "shipmonk/composer-dependency-analyser": "^1.8"
+        "ergebnis/composer-normalize": "^2.57.0",
+        "hosmelq/php-coding-standard": "^1.5.0",
+        "pestphp/pest": "^5.3.6",
+        "pestphp/pest-plugin-agent": "^5.0.0",
+        "pestphp/pest-plugin-rector": "^5.0.6",
+        "shipmonk/composer-dependency-analyser": "^1.8.4"
     },
     "minimum-stability": "stable",
     "prefer-stable": true,
@@ -61,22 +60,20 @@
         "sort-packages": true
     },
     "scripts": {
-        "ecs": "ecs check --fix=true",
-        "ecs:check": "ecs check",
-        "phpstan": "phpstan analyse --configuration=phpstan.neon.dist --memory-limit=4G",
+        "ecs": "ecs check --fix",
+        "phpstan": "phpstan analyse --memory-limit=4G",
         "rector": "rector",
         "test": "pest",
         "test-coverage": "pest --coverage",
         "update-data": "curl --fail --location --show-error --silent --output data/caniemail.json https://www.caniemail.com/api/data.json"
     },
     "scripts-descriptions": {
-        "ecs": "Format PHP code using the shared ECS set.",
-        "ecs:check": "Check PHP formatting using the shared ECS set.",
-        "phpstan": "Run PHPStan static analysis.",
-        "rector": "Run Rector automated refactoring.",
-        "test": "Run the test suite using Pest.",
-        "test-coverage": "Run the test suite with code coverage using Pest.",
-        "update-data": "Download the latest caniemail.com data."
+        "ecs": "Runs ECS.",
+        "phpstan": "Runs PHPStan analyse.",
+        "rector": "Runs Rector.",
+        "test": "Runs the Pest test suite.",
+        "test-coverage": "Runs the Pest test suite with code coverage.",
+        "update-data": "Downloads the latest caniemail.com data."
     },
     "$schema": "https://getcomposer.org/schema.json"
 }

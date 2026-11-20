@@ -1,4 +1,4 @@
-name: Continuous Integration
+name: Continuous integration
 
 on:
   push:
@@ -42,7 +42,7 @@ jobs:
         run: vendor/bin/rector --ansi --dry-run
 
       - name: Check code style
-        run: composer ecs:check
+        run: vendor/bin/ecs check
 
       - name: Check static code
         run: composer phpstan
@@ -62,7 +62,7 @@ jobs:
         include:
           - dependencies: prefer-lowest
             php: '8.4'
-        php: ['8.4', '8.5']
+        php: ['8.4', '8.5', '8.6']
 
     steps:
       - name: Checkout

@@ -34,7 +34,7 @@
     {
       "matchManagers": ["composer"],
       "postUpdateOptions": ["composerWithAll"],
-      "rangeStrategy": "replace"
+      "rangeStrategy": "bump"
     }
   ],
   "rebaseWhen": "conflicted",
