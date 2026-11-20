@@ -137,6 +137,37 @@ it('detects CSS properties and values', function (string $html, array $slugs): v
         '<span style="display: inline-flex"></span>',
         ['html-span', 'css-display', 'css-display-flex'],
     ],
+    'an inline grid container' => [
+        '<span style="display: inline-grid"></span>',
+        ['html-span', 'css-display', 'css-display-grid'],
+    ],
+    'containers in the two-keyword syntax' => [
+        '<span style="display: inline grid"></span><div style="display: block flex"></div>',
+        ['html-span', 'css-display', 'css-display-grid', 'html-div', 'css-display-flex'],
+    ],
+    'run-in containers in the two-keyword syntax' => [
+        '<span style="display: run-in grid"></span><div style="display: flex run-in"></div>',
+        ['html-span', 'css-display', 'css-display-grid', 'html-div', 'css-display-flex'],
+    ],
+    'a layout keyword inside a function' => [
+        '<div style="display: var(--layout, grid )"></div>',
+        ['html-div', 'css-display', 'css-variables'],
+    ],
+    'containers in the two-keyword syntax in reverse order' => [
+        '<span style="display: grid inline"></span><div style="display: flex block"></div>',
+        ['html-span', 'css-display', 'css-display-grid', 'html-div', 'css-display-flex'],
+    ],
+    'containers with comments between the keywords' => [
+        '<style>span { display: inline /* note */ grid } div { display: block/**/flex }</style>',
+        [
+            'html-style',
+            'css-comments',
+            'css-selector-type',
+            'css-display',
+            'css-display-grid',
+            'css-display-flex',
+        ],
+    ],
     'logical borders' => [
         '<p style="border-inline-color: red; border-block-start-width: 1px; border-inline-start: none"></p>',
         [

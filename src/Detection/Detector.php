@@ -21,6 +21,7 @@ use Wikimedia\CSS\Objects\RuleList;
 use Wikimedia\CSS\Objects\SimpleBlock;
 use Wikimedia\CSS\Objects\Token;
 use Wikimedia\CSS\Parser\Parser;
+use Wikimedia\CSS\Util;
 
 final class Detector
 {
@@ -181,9 +182,14 @@ final class Detector
                 $this->add(Catalog::IMPORTANT);
             }
 
-            $this->add(
-                ...Catalog::VALUES[$property][mb_strtolower(mb_trim((string) $value))] ?? [],
-            );
+            $parts = $this->parts($value);
+
+            // The two-keyword display syntax, such as `inline grid`, names its layout in either
+            // position.
+            foreach ($property === 'display' ? $parts : [implode(' ', $parts)] as $part) {
+                $this->add(...Catalog::VALUES[$property][$part] ?? []);
+            }
+
             $this->values($value);
         }
     }
@@ -350,6 +356,26 @@ final class Detector
     private function parse(ComponentValueList $values): Parser
     {
         return Parser::newFromTokens($values->toTokenArray());
+    }
+
+    /**
+     * Returns the top-level parts of a value, without the whitespace and comments between
+     * them, so a comment between `inline` and `grid` doesn't change the match. A function
+     * such as `var()` stays one part.
+     *
+     * @return list<string>
+     */
+    private function parts(ComponentValueList $value): array
+    {
+        $parts = [];
+
+        foreach ($value->toComponentValueArray() as $part) {
+            if (! $this->tokenIs($part, Token::T_WHITESPACE)) {
+                $parts[] = mb_strtolower(Util::stringify($part));
+            }
+        }
+
+        return $parts;
     }
 
     /**

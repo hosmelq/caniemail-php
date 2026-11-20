@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Require wikimedia/css-sanitizer 6.2.2 or newer.
 - Check CSS that contains long strings, such as data URIs, which used to throw a `Safe\Exceptions\PcreException`.
+- Detect `display: inline-grid` as `display:grid`, like `display: inline-flex` is detected as `display:flex`, and detect the two-keyword syntax in either order, such as `display: inline grid` and `display: flex block`, even with comments between the keywords.
 
 ## v1.1.0 - 2026-11-07
 

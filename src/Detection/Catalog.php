@@ -491,6 +491,7 @@ final class Catalog
             'flex' => ['css-display-flex'],
             'grid' => ['css-display-grid'],
             'inline-flex' => ['css-display-flex'],
+            'inline-grid' => ['css-display-grid'],
             'none' => ['css-display-none'],
         ],
         'flex-direction' => [
